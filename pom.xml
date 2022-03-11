@@ -46,8 +46,8 @@
 
     <distributionManagement>
         <repository>
-            <id>github-dvag</id>
-            <name>GitHub Packages</name>
+            <id>github</id>
+            <name>GitHub dvag-lukas-pazderski Apache Maven Packages</name>
             <url>https://maven.pkg.github.com/dvag-lukas-pazderski/teams-integration</url>
         </repository>
     </distributionManagement>
