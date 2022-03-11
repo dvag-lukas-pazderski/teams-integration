@@ -1,0 +1,29 @@
+version: 2
+registries:
+  acr:
+    type: docker-registry
+    url: dvagcr.azurecr.io
+    username: ${{secrets.CONTAINER_REGISTRY_USER}}
+    password: ${{secrets.CONTAINER_REGISTRY_PASSWORD}}
+  maven-github:
+    type: maven-repository
+    url: https://maven.pkg.github.com/dvag
+    username: user
+    password: ${{secrets.PACKAGES_PAT}}
+updates:
+  - package-ecosystem: "maven"
+    directory: "/"
+    registries:
+      - maven-github
+    schedule:
+      interval: "daily"
+  - package-ecosystem: "github-actions"
+    directory: "/"
+    schedule:
+      interval: "daily"
+  - package-ecosystem: "docker"
+    directory: "/"
+    registries:
+      - acr
+    schedule:
+      interval: "daily"

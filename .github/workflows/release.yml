@@ -1,0 +1,16 @@
+name: Release_Build
+"on":
+  release:
+    types:
+      - released
+jobs:
+  build:
+    uses: dvag/workflow-center/.github/workflows/maven_build_lib.yml@0.0.42
+    with:
+      build-type: release
+      image-version: ${{ github.event.release.tag_name }}
+    secrets:
+      AZURE_FUNCTIONS_CODE: ${{ secrets.AZURE_FUNCTIONS_CODE }}
+      PACKAGES_PAT: ${{secrets.PACKAGES_PAT}}
+      SONAR_TOKEN: ${{secrets.SONAR_TOKEN}}
+      SONAR_HOST_URL: ${{secrets.SONAR_HOST_URL}}

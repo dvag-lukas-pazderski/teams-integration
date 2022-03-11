@@ -1,0 +1,17 @@
+name: Update_Workflows
+"on":
+  schedule:
+    - cron: 13 03 * * *
+  workflow_dispatch:
+    inputs:
+      reason:
+        description: optional reason for build
+        default: ""
+        required: false
+jobs:
+  update:
+    uses: dvag/workflow-center/.github/workflows/update_workflows.yml@0.0.42
+    secrets:
+      AZURE_FUNCTIONS_CODE: ${{ secrets.AZURE_FUNCTIONS_CODE }}
+      WORKFLOWS_APP_ID: ${{secrets.WORKFLOWS_APP_ID}}
+      WORKFLOWS_APP_PRIVATE_KEY: ${{secrets.WORKFLOWS_APP_PRIVATE_KEY}}

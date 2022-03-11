@@ -1,0 +1,28 @@
+name: Java_CI_mit_Maven
+"on":
+  push:
+    branches:
+      - main
+    paths-ignore:
+      - .github/workflows/**
+  pull_request:
+    branches:
+      - main
+  workflow_dispatch:
+    inputs:
+      reason:
+        description: optional reason for build
+        default: ""
+        required: false
+jobs:
+  build:
+    uses: dvag/workflow-center/.github/workflows/maven_build_lib.yml@main
+    with:
+      maven-non-recursive: true
+      deploy-on-ci: true
+    secrets:
+      AZURE_FUNCTIONS_CODE: ${{ secrets.AZURE_FUNCTIONS_CODE }}
+      PACKAGES_PAT: ${{secrets.PACKAGES_PAT}}
+      SONAR_TOKEN: ${{secrets.SONAR_TOKEN}}
+      SONAR_HOST_URL: ${{secrets.SONAR_HOST_URL}}
+    concurrency: CI-${{ github.ref}}
